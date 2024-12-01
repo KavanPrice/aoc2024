@@ -5,7 +5,10 @@ import gleam/io
 import gleam/pair
 
 pub fn main() {
-  dict.from_list([#(#(1, 1), day1.get_part1_answer)])
+  dict.from_list([
+    #(#(1, 1), day1.get_part1_answer),
+    #(#(1, 2), day1.get_part2_answer),
+  ])
   |> get_all_answers
   |> print_all_answers
 }

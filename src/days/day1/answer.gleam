@@ -15,6 +15,12 @@ pub fn get_part1_answer() -> Int {
   int.sum(get_distances(sorted1, sorted2, []))
 }
 
+pub fn get_part2_answer() -> Int {
+  let assert Ok(#(list1, list2)) = read_input_to_lists()
+
+  get_similarity(list1, list2)
+}
+
 fn get_distances(
   list1: List(Int),
   list2: List(Int),
@@ -28,6 +34,16 @@ fn get_distances(
       ])
     _, _ -> current_distances
   }
+}
+
+fn get_similarity(list1: List(Int), list2: List(Int)) -> Int {
+  list.fold(over: list1, from: 0, with: fn(acc: Int, target_element: Int) {
+    acc
+    + target_element
+    * list.count(list2, where: fn(current_element: Int) {
+      target_element == current_element
+    })
+  })
 }
 
 fn read_input_to_lists() -> Result(
