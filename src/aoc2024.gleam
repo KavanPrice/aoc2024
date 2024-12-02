@@ -10,6 +10,7 @@ pub fn main() {
     #(#(1, 1), day1.get_part1_answer),
     #(#(1, 2), day1.get_part2_answer),
     #(#(2, 1), day2.get_part1_answer),
+    #(#(2, 2), day2.get_part2_answer),
   ])
   |> get_all_answers
   |> print_all_answers

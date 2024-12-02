@@ -1,6 +1,5 @@
 import gleam/bool
 import gleam/int
-import gleam/io
 import gleam/list
 import gleam/pair
 import gleam/result
@@ -11,6 +10,12 @@ pub fn get_part1_answer() -> Int {
   let assert Ok(reports) = read_input_to_reports()
 
   list.count(reports, report_is_safe)
+}
+
+pub fn get_part2_answer() -> Int {
+  let assert Ok(reports) = read_input_to_reports()
+
+  list.count(reports, report_is_safe_with_dampener)
 }
 
 fn read_input_to_reports() -> Result(List(List(Int)), simplifile.FileError) {
@@ -35,6 +40,12 @@ fn parse_split_line(report_strings: List(String)) -> List(Int) {
   |> list.map(string.trim)
   |> list.map(int.parse)
   |> result.values
+}
+
+fn report_is_safe_with_dampener(report: List(Int)) -> Bool {
+  let threshold = list.length(report) - 1
+  list.combinations(report, threshold)
+  |> list.any(report_is_safe)
 }
 
 fn report_is_safe(report: List(Int)) -> Bool {
