@@ -1,4 +1,5 @@
 import days/day1/answer as day1
+import days/day2/answer as day2
 import gleam/dict
 import gleam/int
 import gleam/io
@@ -8,6 +9,7 @@ pub fn main() {
   dict.from_list([
     #(#(1, 1), day1.get_part1_answer),
     #(#(1, 2), day1.get_part2_answer),
+    #(#(2, 1), day2.get_part1_answer),
   ])
   |> get_all_answers
   |> print_all_answers
