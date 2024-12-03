@@ -13,6 +13,7 @@ pub fn main() {
     #(#(2, 1), day2.get_part1_answer),
     #(#(2, 2), day2.get_part2_answer),
     #(#(3, 1), day3.get_part1_answer),
+    #(#(3, 2), day3.get_part2_answer),
   ])
   |> get_all_answers
   |> print_all_answers

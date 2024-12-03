@@ -1,28 +1,25 @@
-import gleam/bool
 import gleam/int
 import gleam/list
-import gleam/option.{None, Some}
 import gleam/regexp
-import gleam/result
 import gleam/string
 import simplifile
 
 pub fn get_part1_answer() -> Int {
-  let assert Ok(lines) = read_input_to_lines()
+  let assert Ok(input_string) = read_input_to_string()
 
-  lines
-  |> list.map(get_line_value)
-  |> int.sum
+  input_string
+  |> get_line_value
 }
 
-fn read_input_to_lines() -> Result(List(String), simplifile.FileError) {
+pub fn get_part2_answer() -> Int {
+  let assert Ok(input_string) = read_input_to_string()
+
+  input_string
+  |> get_line_value_with_instructions
+}
+
+fn read_input_to_string() -> Result(String, simplifile.FileError) {
   simplifile.read("src/days/day3/input.txt")
-  |> result.map(string.split(_, on: "\n"))
-  |> result.map(list.filter(_, keeping: fn(string: String) {
-    string
-    |> string.is_empty
-    |> bool.negate
-  }))
 }
 
 fn get_line_value(line: String) -> Int {
@@ -37,4 +34,12 @@ fn get_line_value(line: String) -> Int {
     })
   })
   |> int.sum
+}
+
+fn get_line_value_with_instructions(line: String) -> Int {
+  string.split(line, on: "do()")
+  |> list.map(string.split(_, on: "don't()"))
+  |> list.filter_map(fn(sublist) { list.first(sublist) })
+  |> string.join(with: "")
+  |> get_line_value
 }
